@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/start">
+
+        <Constraint
+            android:id="@+id/bgView"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/roundedImage">
+            <CustomAttribute
+                app:attributeName="textColor"
+                app:customColorValue="@color/white" />
+            <CustomAttribute
+                app:attributeName="scaleX"
+                app:customFloatValue="1" />
+            <CustomAttribute
+                app:attributeName="scaleY"
+                app:customFloatValue="1" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <CustomAttribute
+                app:attributeName="titleTextColor"
+                app:customColorValue="@android:color/transparent" />
+
+        </Constraint>
+        <Constraint
+            android:id="@+id/roundedImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/bgView" />
+        <Constraint
+            android:id="@+id/itemsRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/roundedImage" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+
+        <Constraint
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <CustomAttribute
+                app:attributeName="titleTextColor"
+                app:customColorValue="@color/black" />
+
+        </Constraint>
+        <Constraint
+            android:id="@+id/bgView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <CustomAttribute
+                app:attributeName="textColor"
+                app:customColorValue="@color/black" />
+            <CustomAttribute
+                app:attributeName="scaleX"
+                app:customFloatValue="0.65" />
+            <CustomAttribute
+                app:attributeName="scaleY"
+                app:customFloatValue="0.65" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/roundedImage"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/bgView"
+            app:layout_constraintTop_toBottomOf="@id/bgView" />
+        <Constraint
+            android:id="@+id/itemsRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+    </ConstraintSet>
+
+    <Transition
+        app:constraintSetEnd="@id/end"
+        app:constraintSetStart="@+id/start"
+        app:pathMotionArc="startHorizontal">
+        <OnSwipe
+            app:dragDirection="dragUp"
+            app:touchAnchorId="@id/itemsRecycler"
+            app:touchAnchorSide="top" />
+
+        <KeyFrameSet>
+
+            <KeyAttribute
+                app:framePosition="95"
+                app:motionTarget="@id/toolbar">
+                <CustomAttribute
+                    app:attributeName="titleTextColor"
+                    app:customColorValue="@android:color/transparent" />
+            </KeyAttribute>
+
+
+            <KeyAttribute
+                app:framePosition="100"
+                app:motionTarget="@id/toolbar">
+                <CustomAttribute
+                    app:attributeName="titleTextColor"
+                    app:customColorValue="@color/black" />
+            </KeyAttribute>
+
+            <KeyPosition
+                app:framePosition="70"
+                app:keyPositionType="pathRelative"
+                app:motionTarget="@id/titleText"
+                app:percentX="0.95" />
+
+            <KeyAttribute
+                android:alpha="1"
+                app:framePosition="90"
+                app:motionTarget="@id/titleText" />
+
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="100"
+                app:motionTarget="@id/titleText" />
+
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="85"
+                app:motionTarget="@id/bgView" />
+
+        </KeyFrameSet>
+    </Transition>
+</MotionScene>
